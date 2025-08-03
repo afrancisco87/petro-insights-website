@@ -26,11 +26,11 @@ const Hero = () => {
             </div>
             <div className="flex items-center space-x-2">
               <BarChart3 className="h-4 w-4 text-accent" />
-              <span>$2B+ Projects Analyzed</span>
+              <span>Enterprise-Scale Analytics</span>
             </div>
             <div className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4 text-accent" />
-              <span>Global Expertise</span>
+              <span>Organizational Integration</span>
             </div>
           </div>
 
