@@ -22,7 +22,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Location",
-      details: "Houston, TX | Calgary, AB",
+      details: "Bakersfield, CA",
       action: null
     },
     {
