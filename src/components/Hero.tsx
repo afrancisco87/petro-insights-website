@@ -21,10 +21,6 @@ const Hero = () => {
           {/* Trust Indicators */}
           <div className="flex items-center space-x-6 mb-6 text-sm text-muted-foreground">
             <div className="flex items-center space-x-2">
-              <Shield className="h-4 w-4 text-accent" />
-              <span>15+ Years Experience</span>
-            </div>
-            <div className="flex items-center space-x-2">
               <BarChart3 className="h-4 w-4 text-accent" />
               <span>Enterprise-Scale Analytics</span>
             </div>

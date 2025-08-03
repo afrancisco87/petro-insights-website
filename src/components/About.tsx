@@ -3,9 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Award, Users, Target, Globe } from "lucide-react";
 
 const About = () => {
-  const stats = [
-    { number: "15+", label: "Years Experience", icon: Award },
-  ];
+  const stats = [];
 
   const expertise = [
     "Upstream Operations",
