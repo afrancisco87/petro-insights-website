@@ -28,7 +28,7 @@ const Services = () => {
       icon: Shield,
       title: "Regulatory Compliance",
       description: "Navigate complex regulatory landscapes with expert guidance on environmental, safety, and operational compliance.",
-      features: ["HSE audits", "Regulatory strategy", "Permit optimization"]
+      features: ["Regulatory strategy", "Permit optimization"]
     },
     {
       icon: Database,
