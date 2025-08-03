@@ -19,10 +19,10 @@ const Services = () => {
       features: ["Decline curve analysis", "Reservoir simulation", "Production optimization"]
     },
     {
-      icon: TrendingUp,
-      title: "Economic Analysis",
-      description: "Comprehensive financial modeling and investment analysis to guide strategic decision-making and maximize ROI.",
-      features: ["NPV & IRR modeling", "Risk assessment", "Portfolio optimization"]
+      icon: Settings,
+      title: "Production Operations",
+      description: "Optimize drilling, completion, and production operations through advanced analytics and proven methodologies.",
+      features: ["Drilling optimization", "Completion design", "Artificial lift"]
     },
     {
       icon: Shield,
@@ -31,34 +31,10 @@ const Services = () => {
       features: ["HSE audits", "Regulatory strategy", "Permit optimization"]
     },
     {
-      icon: Settings,
-      title: "Operations Optimization",
-      description: "Streamline drilling, completion, and production operations through advanced analytics and proven methodologies.",
-      features: ["Drilling optimization", "Completion design", "Artificial lift"]
-    },
-    {
       icon: Database,
       title: "Data Analytics",
       description: "Transform raw data into actionable insights using cutting-edge analytics and machine learning techniques.",
       features: ["Predictive analytics", "Data integration", "Real-time monitoring"]
-    },
-    {
-      icon: Zap,
-      title: "Digital Transformation",
-      description: "Modernize operations with digital solutions, automation, and integrated technology platforms.",
-      features: ["IoT implementation", "Process automation", "Digital twins"]
-    },
-    {
-      icon: MapPin,
-      title: "Asset Evaluation",
-      description: "Thorough technical and commercial evaluation of upstream assets for acquisition, divestiture, or development.",
-      features: ["Due diligence", "Resource assessment", "Valuation models"]
-    },
-    {
-      icon: Calculator,
-      title: "Project Management",
-      description: "End-to-end project management services ensuring on-time, on-budget delivery of complex energy projects.",
-      features: ["Project planning", "Risk management", "Quality assurance"]
     }
   ];
 
