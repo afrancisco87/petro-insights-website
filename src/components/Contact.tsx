@@ -160,7 +160,7 @@ const Contact = () => {
                       <Input 
                         id="phone" 
                         type="tel" 
-                        placeholder="+1 (555) 123-4567" 
+                        placeholder="+1 (805) 760-6682" 
                         className="mt-2"
                       />
                     </div>
