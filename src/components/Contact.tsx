@@ -16,8 +16,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      action: "tel:+15551234567"
+      details: "+1 (805) 760-6682",
+      action: "tel:+18057606682"
     },
     {
       icon: MapPin,
@@ -105,10 +105,6 @@ const Contact = () => {
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-accent rounded-full mr-3"></span>
                     Proven ROI delivery
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-1.5 h-1.5 bg-accent rounded-full mr-3"></span>
-                    Global project experience
                   </li>
                 </ul>
               </CardContent>
