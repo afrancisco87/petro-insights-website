@@ -1,11 +1,59 @@
-import { Button } from "@/components/ui/button";
+import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
-const Contact = () => {
+export default function Contact() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      company: formData.get('company') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      projectType: formData.get('project-type') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const response = await fetch('/functions/v1/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        });
+        e.currentTarget.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -123,12 +171,13 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent className="p-0">
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="name" className="text-foreground">Name *</Label>
                       <Input 
                         id="name" 
+                        name="name"
                         placeholder="Your full name" 
                         className="mt-2"
                         required 
@@ -138,6 +187,7 @@ const Contact = () => {
                       <Label htmlFor="company" className="text-foreground">Company</Label>
                       <Input 
                         id="company" 
+                        name="company"
                         placeholder="Your company name" 
                         className="mt-2"
                       />
@@ -149,6 +199,7 @@ const Contact = () => {
                       <Label htmlFor="email" className="text-foreground">Email *</Label>
                       <Input 
                         id="email" 
+                        name="email"
                         type="email" 
                         placeholder="your.email@company.com" 
                         className="mt-2"
@@ -159,6 +210,7 @@ const Contact = () => {
                       <Label htmlFor="phone" className="text-foreground">Phone</Label>
                       <Input 
                         id="phone" 
+                        name="phone"
                         type="tel" 
                         placeholder="+1 (555) 555-5555" 
                         className="mt-2"
@@ -170,6 +222,7 @@ const Contact = () => {
                     <Label htmlFor="project-type" className="text-foreground">Project Type</Label>
                     <select 
                       id="project-type" 
+                      name="project-type"
                       className="w-full mt-2 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                     >
                       <option value="">Select project type</option>
@@ -187,14 +240,15 @@ const Contact = () => {
                     <Label htmlFor="message" className="text-foreground">Project Details *</Label>
                     <Textarea
                       id="message"
+                      name="message"
                       placeholder="Please describe your project requirements, timeline, and any specific challenges you're facing..."
                       className="mt-2 min-h-[120px]"
                       required
                     />
                   </div>
 
-                  <Button variant="hero" size="lg" className="w-full" type="submit">
-                    Send Message
+                  <Button variant="hero" size="lg" className="w-full" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </form>
@@ -205,6 +259,4 @@ const Contact = () => {
       </div>
     </section>
   );
-};
-
-export default Contact;
+}
