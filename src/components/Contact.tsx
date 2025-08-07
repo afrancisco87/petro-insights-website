@@ -26,7 +26,7 @@ export default function Contact() {
     };
 
     try {
-      const response = await fetch('/functions/v1/send-contact-email', {
+      const response = await fetch('https://lfyhjiwgpxxyejpegyok.supabase.co/functions/v1/send-contact-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
