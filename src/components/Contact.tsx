@@ -1,58 +1,7 @@
-import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function Contact() {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name') as string,
-      company: formData.get('company') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-      projectType: formData.get('project-type') as string,
-      message: formData.get('message') as string,
-    };
-
-    try {
-      const response = await fetch('https://lfyhjiwgpxxyejpegyok.supabase.co/functions/v1/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
-        });
-        e.currentTarget.reset();
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const contactInfo = [
     {
@@ -76,7 +25,7 @@ export default function Contact() {
     {
       icon: Clock,
       title: "Response Time",
-      details: "Within 24 hours",
+      details: "Within 48 hours",
       action: null
     }
   ];
@@ -94,13 +43,13 @@ export default function Contact() {
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Let's discuss how our expertise can help optimize your operations 
-            and drive sustainable growth for your organization.
+            and drive sustainable growth for your organization. We'll get back to you within 48 hours.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Information */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6 text-center">
             <div>
               <h3 className="text-2xl font-semibold text-foreground mb-6">Get In Touch</h3>
               <p className="text-muted-foreground mb-8 leading-relaxed">
@@ -110,7 +59,7 @@ export default function Contact() {
             </div>
 
             {/* Contact Cards */}
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {contactInfo.map((item) => {
                 const Icon = item.icon;
                 const content = (
@@ -138,7 +87,7 @@ export default function Contact() {
             </div>
 
             {/* Quick Benefits */}
-            <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+            <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 max-w-md mx-auto">
               <CardContent className="p-0">
                 <h4 className="font-semibold text-foreground mb-4">Why Choose PetroInsights?</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -155,103 +104,6 @@ export default function Contact() {
                     Proven ROI delivery
                   </li>
                 </ul>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="p-8 shadow-elegant">
-              <CardHeader className="p-0 mb-6">
-                <CardTitle className="text-2xl font-semibold text-foreground">
-                  Start Your Project
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Fill out the form below and we'll get back to you within 24 hours.
-                </p>
-              </CardHeader>
-              <CardContent className="p-0">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="name" className="text-foreground">Name *</Label>
-                      <Input 
-                        id="name" 
-                        name="name"
-                        placeholder="Your full name" 
-                        className="mt-2"
-                        required 
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="company" className="text-foreground">Company</Label>
-                      <Input 
-                        id="company" 
-                        name="company"
-                        placeholder="Your company name" 
-                        className="mt-2"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="email" className="text-foreground">Email *</Label>
-                      <Input 
-                        id="email" 
-                        name="email"
-                        type="email" 
-                        placeholder="your.email@company.com" 
-                        className="mt-2"
-                        required 
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone" className="text-foreground">Phone</Label>
-                      <Input 
-                        id="phone" 
-                        name="phone"
-                        type="tel" 
-                        placeholder="+1 (555) 555-5555" 
-                        className="mt-2"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="project-type" className="text-foreground">Project Type</Label>
-                    <select 
-                      id="project-type" 
-                      name="project-type"
-                      className="w-full mt-2 px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    >
-                      <option value="">Select project type</option>
-                      <option value="reservoir">Reservoir Engineering</option>
-                      <option value="economics">Economic Analysis</option>
-                      <option value="operations">Operations Optimization</option>
-                      <option value="compliance">Regulatory Compliance</option>
-                      <option value="digital">Digital Transformation</option>
-                      <option value="evaluation">Asset Evaluation</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="message" className="text-foreground">Project Details *</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Please describe your project requirements, timeline, and any specific challenges you're facing..."
-                      className="mt-2 min-h-[120px]"
-                      required
-                    />
-                  </div>
-
-                  <Button variant="hero" size="lg" className="w-full" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </form>
               </CardContent>
             </Card>
           </div>
